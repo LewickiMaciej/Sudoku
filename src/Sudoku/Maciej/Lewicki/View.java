@@ -10,17 +10,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- * @author dell
+ * @author Maciej Lewicki
  *
  */
 public class View {
 	private static final int DEFAULT_WIDTH = 500;
 	private static final int DEFAULT_HEIGHT = 500;
-	
+
 	public View(){
 	}
 	
-	public void createBoard(Model model){
+	public void createBoard(Model model, Controller x){
 		JFrame frame = new JFrame();
 		frame.setTitle("Listeners");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,8 +34,11 @@ public class View {
 			for(int j=0; j<9; j++){
 				labelOfButton = Integer.toString(model.getActualValue(i,j));
 				JButton button = new JButton(labelOfButton);
+				int wynik = i*10 + j;
+				String actionValue = Integer.toString(wynik);  
+				Controller.MyAction buttonAction = x.new MyAction(actionValue);
+				button.addActionListener(buttonAction);
 				panel.add(button);
-				
 			}
 		}
 		frame.add(panel);

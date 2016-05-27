@@ -4,13 +4,13 @@
 package Sudoku.Maciej.Lewicki;
 
 /**
- * @author dell
+ * @author Maciej Lewicki
  *
  */
 public class Model {
-	private int [][]previusBoard = new int [9][9];
 	private int [][]actualBoard = new int [9][9];
 	private int [][]result = new int [9][9];
+	private String whichToSet = "";
 	
 	public Model(){
 		/**
@@ -18,10 +18,17 @@ public class Model {
 		 */
 		for(int i =  0; i<9; i++){
 			for(int j = 0; j<9; j++){
-				previusBoard[i][j] = 1;
-				actualBoard[i][j] = 1;
-				result[i][j] = 1;
+				actualBoard[i][j] = j;
+				result[i][j] = j;
 			}
 		}
+	}
+	
+	public int getActualValue(int row, int column){
+		return actualBoard[row][column];
+	}
+	
+	public void numberToSet(String WchichNumberToSet){
+		whichToSet = WchichNumberToSet;
 	}
 }
