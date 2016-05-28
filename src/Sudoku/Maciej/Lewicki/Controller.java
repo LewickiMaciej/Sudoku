@@ -46,8 +46,10 @@ public class Controller{
 			String text = textField.getText();
 			int returnValue = model.insertValue(text);
 			System.out.println(returnValue);
-			if(returnValue == 1){
+			if(returnValue >= 1){
 				view.updateView(model, text);
+				if(returnValue == 2)
+					view.endGame();
 			}
 		}
 	}

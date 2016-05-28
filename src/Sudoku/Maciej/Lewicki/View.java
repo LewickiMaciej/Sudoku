@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -20,12 +21,13 @@ public class View {
 	private static final int DEFAULT_WIDTH = 900;
 	private static final int DEFAULT_HEIGHT = 600;
 	private JButton[][] tableOfButtons= new JButton[9][9];
+	private JFrame frame;
 	
 	public View(){
 	}
 	
 	public void createBoard(Model model, Controller x){
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setTitle("Listeners");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -73,5 +75,9 @@ public class View {
 		int numberOfRow = which / 10;
 		int numberOfColumn = which % 10;
 		tableOfButtons[numberOfRow][numberOfColumn].setText(text);
+	}
+	
+	public void endGame(){
+		JOptionPane.showMessageDialog(frame,"You won!");
 	}
 }

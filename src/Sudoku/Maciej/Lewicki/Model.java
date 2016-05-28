@@ -77,8 +77,22 @@ public class Model {
 		int goodValue = result[numberOfRow][numberOfColumn];
 		if(nText == goodValue){
 			actualBoard[numberOfRow][numberOfColumn] = nText;
+			if(isEnd()){
+				return 2;
+			}
 			return 1;
 		}
 		return 0;
+	}
+	
+	private boolean isEnd(){
+		for(int i =0; i<9; i++){
+			for(int j =0; j<9; j++){
+				if (actualBoard[i][j] != result[i][j]){
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }
