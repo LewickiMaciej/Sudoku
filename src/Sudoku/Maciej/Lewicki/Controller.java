@@ -43,6 +43,8 @@ public class Controller{
 		}
 		
 		public void actionPerformed(ActionEvent event){
+			String text = textField.getText();
+			int returnValue = model.insertValue(text);
 		}
 	}
 }
