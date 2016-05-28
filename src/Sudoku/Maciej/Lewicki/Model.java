@@ -19,7 +19,7 @@ public class Model {
 		for(int i =  0; i<9; i++){
 			for(int j = 0; j<9; j++){
 				actualBoard[i][j] = j;
-				result[i][j] = j;
+				result[i][j] = j +1;
 			}
 		}
 	}
@@ -30,6 +30,10 @@ public class Model {
 	
 	public void numberToSet(String WchichNumberToSet){
 		whichToSet = WchichNumberToSet;
+	}
+	
+	public String getWhichToSet(){
+		return whichToSet;
 	}
 	
 	/*return == 1 mean "value OK"; return == 0 mean "Bad value"*/ 

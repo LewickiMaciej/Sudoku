@@ -18,7 +18,8 @@ import javax.swing.JTextField;
 public class View {
 	private static final int DEFAULT_WIDTH = 500;
 	private static final int DEFAULT_HEIGHT = 500;
-
+	private JButton[][] tableOfButtons= new JButton[9][9];
+	
 	public View(){
 	}
 	
@@ -36,6 +37,7 @@ public class View {
 			for(int j=0; j<9; j++){
 				labelOfButton = Integer.toString(model.getActualValue(i,j));
 				JButton button = new JButton(labelOfButton);
+				tableOfButtons[i][j] = button;
 				int wynik = i*10 + j;
 				String actionValue = Integer.toString(wynik);  
 				Controller.ButtonAction buttonAction = x.new ButtonAction(actionValue);
@@ -44,7 +46,7 @@ public class View {
 			}
 		}
 		JPanel panelSouth = new JPanel();
-		JTextField textField = new JTextField("Tu wprowadz wartosc", 1);
+		JTextField textField = new JTextField("0", 1);
 		JButton button = new JButton("Wprowadz wartosc");
 		Controller.UpdateValue updateValue= x.new UpdateValue(textField);
 		button.addActionListener(updateValue);
@@ -55,4 +57,10 @@ public class View {
 		frame.setVisible(true);
 	}
 	
+	public void updateView(Model model, String text){
+		int which = Integer.parseInt(model.getWhichToSet());
+		int numberOfRow = which / 10;
+		int numberOfColumn = which % 10;
+		tableOfButtons[numberOfRow][numberOfColumn].setText(text);
+	}
 }

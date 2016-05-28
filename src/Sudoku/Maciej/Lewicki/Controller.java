@@ -45,6 +45,10 @@ public class Controller{
 		public void actionPerformed(ActionEvent event){
 			String text = textField.getText();
 			int returnValue = model.insertValue(text);
+			System.out.println(returnValue);
+			if(returnValue == 1){
+				view.updateView(model, text);
+			}
 		}
 	}
 }
