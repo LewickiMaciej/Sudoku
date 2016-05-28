@@ -27,44 +27,9 @@ public class View {
 	}
 	
 	public void createBoard(Model model, Controller x){
-		frame = new JFrame();
-		frame.setTitle("Listeners");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		frame.setVisible(true);
-		
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(11,11));
-		String labelOfButton = "";
-		for(int i=0; i<9; i++){
-			for(int j=0; j<9; j++){
-				labelOfButton = Integer.toString(model.getActualValue(i,j));
-				JButton button = new JButton(labelOfButton);
-				tableOfButtons[i][j] = button;
-				int wynik = i*10 + j;
-				String actionValue = Integer.toString(wynik);  
-				Controller.ButtonAction buttonAction = x.new ButtonAction(actionValue);
-				button.addActionListener(buttonAction);
-				panel.add(button);
-				if(j == 2 || j == 5)
-					panel.add(Box.createHorizontalStrut(10));
-			}
-			if(i == 2 || i == 5){
-				for(int j=0; j<11; j++){
-					JButton button = new JButton("x");
-					button.setVisible(false);
-					panel.add(button);
-				}
-			}
-			
-		}
-		JPanel panelSouth = new JPanel();
-		JTextField textField = new JTextField("0", 1);
-		JButton button = new JButton("Wprowadz wartosc");
-		Controller.UpdateValue updateValue= x.new UpdateValue(textField);
-		button.addActionListener(updateValue);
-		panelSouth.add(textField);
-		panelSouth.add(button);
+		createFrame();
+		JPanel panel = createGridLayout(model, x);
+		JPanel panelSouth = createSouthPanel(x);
 		frame.add(panel);
 		frame.add(panelSouth, BorderLayout.SOUTH);
 		frame.setVisible(true);
@@ -79,5 +44,60 @@ public class View {
 	
 	public void endGame(){
 		JOptionPane.showMessageDialog(frame,"You won!");
+	}
+	
+	private void createFrame(){
+		frame = new JFrame();
+		frame.setTitle("Listeners");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		frame.setVisible(true);
+	}
+	
+	private JPanel createGridLayout(Model model, Controller x){
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(11,11));
+		for(int i=0; i<9; i++){
+			for(int j=0; j<9; j++){
+				JButton button = addButtonForGridLayout(model, x,panel, i, j);
+				tableOfButtons[i][j] = button;
+			}
+			if(i == 2 || i == 5){
+				for(int j=0; j<11; j++){
+					addUnvisibleButton(panel);
+				}
+			}
+		}
+		return panel;
+	}
+	
+	private JPanel createSouthPanel( Controller x){
+		JPanel panel = new JPanel();
+		JTextField textField = new JTextField("0", 1);
+		JButton button = new JButton("Wprowadz wartosc");
+		Controller.UpdateValue updateValue= x.new UpdateValue(textField);
+		button.addActionListener(updateValue);
+		panel.add(textField);
+		panel.add(button);
+		return panel;
+	}
+	
+	private JButton addButtonForGridLayout(Model model, Controller x, JPanel panel, int row, int column){
+		String labelOfButton = Integer.toString(model.getActualValue(row, column));
+		JButton button = new JButton(labelOfButton);
+		
+		String actionValue = Integer.toString( row*10 + column);  
+		Controller.ButtonAction buttonAction = x.new ButtonAction(actionValue);
+		button.addActionListener(buttonAction);
+		panel.add(button);
+		if(column == 2 || column == 5)
+			panel.add(Box.createHorizontalStrut(10));
+		return button;
+	}
+	
+	private void addUnvisibleButton(JPanel panel){
+		JButton button = new JButton("x");
+		button.setVisible(false);
+		panel.add(button);
 	}
 }

@@ -24,7 +24,6 @@ public class Model {
 			for(i=0;i<9;i++){
 				for(j=0;j<9;j++){
 					actualBoard[i][j] = in.read();
-					
 				}
 			}
 			for(i=0;i<9;i++){

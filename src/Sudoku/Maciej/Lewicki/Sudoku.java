@@ -4,7 +4,7 @@
 package Sudoku.Maciej.Lewicki;
 
 /**
- * @author dell
+ * @author Maciej Lewicki
  *
  */
 public class Sudoku {
