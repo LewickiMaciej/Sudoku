@@ -6,6 +6,8 @@ package Sudoku.Maciej.Lewicki;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JTextField;
+
 /**
  * @author Maciej Lewicki
  *
@@ -21,15 +23,26 @@ public class Controller{
 	}
 	
 	
-	public class MyAction implements ActionListener{
+	public class ButtonAction implements ActionListener{
 		private String whichNumber;
 		
-		public MyAction(String xWhichNumber){
+		public ButtonAction(String xWhichNumber){
 			whichNumber = xWhichNumber;
 		}
 		
 		public void actionPerformed(ActionEvent event){
 			model.numberToSet(whichNumber);
+		}
+	}
+	
+	public class UpdateValue implements ActionListener{
+		JTextField textField;
+		
+		public UpdateValue(JTextField xTextField){
+			textField = xTextField;
+		}
+		
+		public void actionPerformed(ActionEvent event){
 		}
 	}
 }
