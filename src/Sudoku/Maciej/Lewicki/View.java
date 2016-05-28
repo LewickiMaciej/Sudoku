@@ -6,6 +6,7 @@ package Sudoku.Maciej.Lewicki;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,8 +17,8 @@ import javax.swing.JTextField;
  *
  */
 public class View {
-	private static final int DEFAULT_WIDTH = 500;
-	private static final int DEFAULT_HEIGHT = 500;
+	private static final int DEFAULT_WIDTH = 900;
+	private static final int DEFAULT_HEIGHT = 600;
 	private JButton[][] tableOfButtons= new JButton[9][9];
 	
 	public View(){
@@ -31,7 +32,7 @@ public class View {
 		frame.setVisible(true);
 		
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(9,9));
+		panel.setLayout(new GridLayout(11,11));
 		String labelOfButton = "";
 		for(int i=0; i<9; i++){
 			for(int j=0; j<9; j++){
@@ -43,7 +44,17 @@ public class View {
 				Controller.ButtonAction buttonAction = x.new ButtonAction(actionValue);
 				button.addActionListener(buttonAction);
 				panel.add(button);
+				if(j == 2 || j == 5)
+					panel.add(Box.createHorizontalStrut(10));
 			}
+			if(i == 2 || i == 5){
+				for(int j=0; j<11; j++){
+					JButton button = new JButton("x");
+					button.setVisible(false);
+					panel.add(button);
+				}
+			}
+			
 		}
 		JPanel panelSouth = new JPanel();
 		JTextField textField = new JTextField("0", 1);
