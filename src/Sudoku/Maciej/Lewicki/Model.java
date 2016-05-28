@@ -3,6 +3,9 @@
  */
 package Sudoku.Maciej.Lewicki;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+
 /**
  * @author Maciej Lewicki
  *
@@ -13,15 +16,35 @@ public class Model {
 	private String whichToSet = "";
 	
 	public Model(){
-		/**
-		 * TODO initialization of board
-		 */
-		for(int i =  0; i<9; i++){
-			for(int j = 0; j<9; j++){
-				actualBoard[i][j] = j;
-				result[i][j] = j +1;
+		FileInputStream in = null;
+		int i=0,j=0;
+		try{
+			in = new FileInputStream("boards.txt");
+			
+			for(i=0;i<9;i++){
+				for(j=0;j<9;j++){
+					actualBoard[i][j] = in.read();
+					
+				}
 			}
+			for(i=0;i<9;i++){
+				for(j=0;j<9;j++){
+					result[i][j] = in.read();
+				}
+			}
+		}catch(Exception e){
+			System.out.println("Bad file!!!");
+			System.exit(555);
 		}
+		try{
+			if (in != null) {
+				in.close();
+			}
+		}catch(IOException e){
+			System.out.println("Cannot close file!!!");
+			System.exit(555);
+		}
+		
 	}
 	
 	public int getActualValue(int row, int column){
