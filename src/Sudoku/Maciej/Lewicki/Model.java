@@ -14,7 +14,7 @@ public class Model {
 	private int [][]actualBoard = new int [9][9];
 	private int [][]result = new int [9][9];
 	private String whichToSet = "";
-	private static final int howManyBoards = 1;
+	private static final int howManyBoards = 2;
 	private int whichBoard = 0;
 	
 	public Model(){
@@ -45,6 +45,7 @@ public class Model {
 					result[i][j] = in.read();
 				}
 			}
+			whichBoard++;
 		}catch(Exception e){
 			System.out.println("Bad file!!!");
 			System.exit(555);
@@ -79,20 +80,19 @@ public class Model {
 		int nText;
 		try{
 			nText = Integer.parseInt(text);
+			if (nText > 9 || nText < 1){
+				return 0;
+			}
+			int goodValue = result[numberOfRow][numberOfColumn];
+			if(nText == goodValue){
+				actualBoard[numberOfRow][numberOfColumn] = nText;
+				if(isEnd()){
+					return 2;
+				}
+				return 1;
+			}
 		} catch(Exception e){
 			return 0;
-		}
-		
-		if (nText > 9 || nText < 1){
-			return 0;
-		}
-		int goodValue = result[numberOfRow][numberOfColumn];
-		if(nText == goodValue){
-			actualBoard[numberOfRow][numberOfColumn] = nText;
-			if(isEnd()){
-				return 2;
-			}
-			return 1;
 		}
 		return 0;
 	}

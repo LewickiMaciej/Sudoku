@@ -54,10 +54,11 @@ public class Controller{
 				view.updateView(model, text);
 				if(returnValue == 2){
 					returnValue = view.endGame();
-					System.out.println(returnValue);}
-			}
-			if(returnValue == 0){
-				newBoard();
+					if(returnValue == 0)
+						newBoard();
+					if(returnValue > 0)
+						System.exit(0);
+				}
 			}
 		}
 	}
