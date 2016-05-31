@@ -14,13 +14,23 @@ public class Model {
 	private int [][]actualBoard = new int [9][9];
 	private int [][]result = new int [9][9];
 	private String whichToSet = "";
+	private static final int howManyBoards = 1;
+	private int whichBoard = 0;
 	
 	public Model(){
 		FileInputStream in = null;
 		int i=0,j=0;
 		try{
 			in = new FileInputStream("boards.txt");
-			
+			int numberOfBoardsToSkip = whichBoard;
+			if (whichBoard >= howManyBoards){
+				System.exit(0);
+			}
+			for(i = numberOfBoardsToSkip; i>0; i--){
+				for(int skipBoards = 162; skipBoards > 0; skipBoards-- ){
+					in.read();
+				}
+			}
 			for(i=0;i<9;i++){
 				for(j=0;j<9;j++){
 					actualBoard[i][j] = in.read();
