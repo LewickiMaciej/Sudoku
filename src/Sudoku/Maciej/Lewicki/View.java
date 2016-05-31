@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 /**
  * @author Maciej Lewicki
  *
@@ -48,7 +47,7 @@ public class View {
 	
 	private void createFrame(){
 		frame = new JFrame();
-		frame.setTitle("Listeners");
+		frame.setTitle("Sudoku");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		frame.setVisible(true);
@@ -83,9 +82,12 @@ public class View {
 	}
 	
 	private JButton addButtonForGridLayout(Model model, Controller x, JPanel panel, int row, int column){
-		String labelOfButton = Integer.toString(model.getActualValue(row, column));
+		int value = model.getActualValue(row, column);
+		String labelOfButton = Integer.toString(value);
 		JButton button = new JButton(labelOfButton);
-		
+		if(value == 0){
+			button.setText("");
+		}
 		String actionValue = Integer.toString( row*10 + column);  
 		Controller.ButtonAction buttonAction = x.new ButtonAction(actionValue);
 		button.addActionListener(buttonAction);
