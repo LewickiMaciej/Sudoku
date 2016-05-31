@@ -22,6 +22,10 @@ public class Controller{
 		view.createBoard(model, this);
 	}
 	
+	private void newBoard(){
+		model.newBoard();
+		view.fillBoard(model);
+	}
 	
 	public class ButtonAction implements ActionListener{
 		private String whichNumber;
@@ -45,11 +49,15 @@ public class Controller{
 		public void actionPerformed(ActionEvent event){
 			String text = textField.getText();
 			int returnValue = model.insertValue(text);
-			System.out.println(returnValue);
+			
 			if(returnValue >= 1){
 				view.updateView(model, text);
-				if(returnValue == 2)
-					view.endGame();
+				if(returnValue == 2){
+					returnValue = view.endGame();
+					System.out.println(returnValue);}
+			}
+			if(returnValue == 0){
+				newBoard();
 			}
 		}
 	}

@@ -41,8 +41,9 @@ public class View {
 		tableOfButtons[numberOfRow][numberOfColumn].setText(text);
 	}
 	
-	public void endGame(){
-		JOptionPane.showMessageDialog(frame,"You won!");
+	public int endGame(){
+		int z = JOptionPane.showConfirmDialog(frame, "You won!\nDo you want to play again?");
+		return z;
 	}
 	
 	private void createFrame(){
@@ -82,12 +83,7 @@ public class View {
 	}
 	
 	private JButton addButtonForGridLayout(Model model, Controller x, JPanel panel, int row, int column){
-		int value = model.getActualValue(row, column);
-		String labelOfButton = Integer.toString(value);
-		JButton button = new JButton(labelOfButton);
-		if(value == 0){
-			button.setText("");
-		}
+		JButton button = fillButton(model, row, column, new JButton());  //also create new button
 		String actionValue = Integer.toString( row*10 + column);  
 		Controller.ButtonAction buttonAction = x.new ButtonAction(actionValue);
 		button.addActionListener(buttonAction);
@@ -101,5 +97,23 @@ public class View {
 		JButton button = new JButton("x");
 		button.setVisible(false);
 		panel.add(button);
+	}
+	
+	public void fillBoard(Model model){
+		for(int i =0; i<9; i++){
+			for(int j=0;j<9;j++){
+				fillButton(model, i, j, tableOfButtons[i][j]);
+			}
+		}
+	}
+	
+	private JButton fillButton(Model model, int row, int column, JButton button){
+		int value = model.getActualValue(row, column);
+		String labelOfButton = Integer.toString(value);
+		button.setText(labelOfButton);
+		if(value == 0){
+			button.setText("");
+		}
+		return button;
 	}
 }

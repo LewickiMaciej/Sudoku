@@ -18,13 +18,17 @@ public class Model {
 	private int whichBoard = 0;
 	
 	public Model(){
+		newBoard();
+	}
+	
+	public void newBoard(){
 		FileInputStream in = null;
 		int i=0,j=0;
 		try{
 			in = new FileInputStream("boards.txt");
 			int numberOfBoardsToSkip = whichBoard;
 			if (whichBoard >= howManyBoards){
-				System.exit(0);
+				whichBoard = 0;
 			}
 			for(i = numberOfBoardsToSkip; i>0; i--){
 				for(int skipBoards = 162; skipBoards > 0; skipBoards-- ){
@@ -53,7 +57,6 @@ public class Model {
 			System.out.println("Cannot close file!!!");
 			System.exit(555);
 		}
-		
 	}
 	
 	public int getActualValue(int row, int column){
