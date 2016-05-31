@@ -17,10 +17,16 @@ public class Model {
 	private static final int howManyBoards = 2;
 	private int whichBoard = 0;
 	
+	/**
+	 * constructor
+	 */
 	public Model(){
 		newBoard();
 	}
 	
+	/**
+	 * create board
+	 */
 	public void newBoard(){
 		FileInputStream in = null;
 		int i=0,j=0;
@@ -60,19 +66,37 @@ public class Model {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param row row of value to get
+	 * @param column column of value to get
+	 * @return return value which you get
+	 */
 	public int getActualValue(int row, int column){
 		return actualBoard[row][column];
 	}
 	
+	/**
+	 * 
+	 * @param WchichNumberToSet change variable whichToSet
+	 */
 	public void numberToSet(String WchichNumberToSet){
 		whichToSet = WchichNumberToSet;
 	}
 	
+	/**
+	 * 
+	 * @return get variable whitchToSet
+	 */
 	public String getWhichToSet(){
 		return whichToSet;
 	}
 	
-	/*return == 1 mean "value OK"; return == 0 mean "Bad value"*/ 
+	/**
+	 * 
+	 * @param text value to insert
+	 * @return 1 mean "value OK"; return == 0 mean "Bad value"
+	 */ 
 	public int insertValue(String text){
 		int which = Integer.parseInt(whichToSet);
 		int numberOfRow = which / 10;
@@ -97,6 +121,10 @@ public class Model {
 		return 0;
 	}
 	
+	/**
+	 * 
+	 * @return signal  "this is end"  
+	 */
 	private boolean isEnd(){
 		for(int i =0; i<9; i++){
 			for(int j =0; j<9; j++){
